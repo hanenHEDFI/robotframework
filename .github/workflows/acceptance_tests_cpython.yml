@@ -38,7 +38,7 @@ jobs:
           architecture: 'x64'
 
       - name: Get test runner Python at Windows
-        run: echo "::set-env name=atestPython::$((get-command python.exe).Path)"
+        run: echo "::set-env name=atestPython::$($env:pythonLocation)\python.exe"
         if: runner.os == 'Windows'
 
       - name: Get test runner Python
