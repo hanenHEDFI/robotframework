@@ -38,11 +38,11 @@ jobs:
           architecture: 'x64'
 
       - name: Get test runner Python at Windows
-        run: echo "::set-env name=ATEST_PYTHON::$((get-command python.exe).Path)"
+        run: echo "::set-env name=atestPython::$((get-command python.exe).Path)"
         if: runner.os == 'Windows'
 
       - name: Get test runner Python
-        run: echo "::set-env name=ATEST_PYTHON::$(which python)"
+        run: echo "::set-env name=atestPython::$(which python)"
 
       - name: Setup python ${{ matrix.python-version }} for running the tests
         uses: actions/setup-python@v1.1.1
@@ -75,7 +75,7 @@ jobs:
           python -m pip install -r atest/requirements.txt
           ${{ matrix.set_codepage }}
           ${{ matrix.set_display }}
-          ${{ env.ATEST_PYTHON }} atest/run.py ${{ matrix.base_python }} --exclude no-ci atest/robot
+          ${{ env.atestPython }} atest/run.py ${{ matrix.base_python }} --exclude no-ci atest/robot
 
       - name: Delete output.xml (on Win)
         run: |
